@@ -10,16 +10,15 @@
   const WHATSAPP_MESSAGE = "Hola Calixto, vi tu tarjeta digital y quiero información para contratarte para un evento.";
   const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
-  // TODO: reemplazar por las fotos reales del artista (mismo nombre de archivo o actualizar rutas)
+  // Fotos reales de Calixto
   const GALLERY_IMAGES = [
-    { src: "assets/img/gallery/gallery-1.jpg", alt: "Calixto en presentación en vivo 1", tall: true },
-    { src: "assets/img/gallery/gallery-2.jpg", alt: "Calixto en presentación en vivo 2" },
-    { src: "assets/img/gallery/gallery-3.jpg", alt: "Calixto en presentación en vivo 3" },
-    { src: "assets/img/gallery/gallery-4.jpg", alt: "Calixto en presentación en vivo 4", tall: true },
-    { src: "assets/img/gallery/gallery-5.jpg", alt: "Calixto en presentación en vivo 5" },
-    { src: "assets/img/gallery/gallery-6.jpg", alt: "Calixto en presentación en vivo 6" },
-    { src: "assets/img/gallery/gallery-7.jpg", alt: "Calixto en presentación en vivo 7", tall: true },
-    { src: "assets/img/gallery/gallery-8.jpg", alt: "Calixto en presentación en vivo 8" }
+    { src: "assets/img/gallery/gallery-1.jpg", alt: "Calixto Acordeón Mágico en escenario ante gran multitud", tall: true },
+    { src: "assets/img/gallery/gallery-2.jpg", alt: "Calixto y su banda en presentación en vivo con luces azules" },
+    { src: "assets/img/gallery/gallery-3.jpg", alt: "Calixto Acordeón Mágico — imagen promocional" },
+    { src: "assets/img/gallery/gallery-4.jpg", alt: "Calixto con sombrero vueltiao y acordeón", tall: true },
+    { src: "assets/img/gallery/gallery-5.jpg", alt: "Calixto con acordeón Hohner rojo al aire libre" },
+    { src: "assets/img/gallery/gallery-6.jpg", alt: "Calixto con su grupo musical" },
+    { src: "assets/img/gallery/gallery-7.jpg", alt: "Calixto Acordeón Mágico con sombrero colombiano en bar" }
   ];
 
   /* ---------- UTIL ---------- */
@@ -56,7 +55,6 @@
     window.addEventListener("load", () => {
       setTimeout(() => splash.classList.add("hide"), delay);
     });
-    // Fallback de seguridad por si 'load' tarda
     setTimeout(() => splash.classList.add("hide"), 2500);
   }
 
@@ -74,7 +72,7 @@
           io.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+    }, { threshold: 0.12, rootMargin: "0px 0px -36px 0px" });
     items.forEach(el => io.observe(el));
   }
 
@@ -94,16 +92,10 @@
       };
       requestAnimationFrame(tick);
     };
-    if (!("IntersectionObserver" in window)) {
-      nums.forEach(animate);
-      return;
-    }
+    if (!("IntersectionObserver" in window)) { nums.forEach(animate); return; }
     const io = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          animate(entry.target);
-          io.unobserve(entry.target);
-        }
+        if (entry.isIntersecting) { animate(entry.target); io.unobserve(entry.target); }
       });
     }, { threshold: 0.5 });
     nums.forEach(el => io.observe(el));
@@ -117,19 +109,18 @@
     if (!grid) return;
     grid.innerHTML = GALLERY_IMAGES.map((img, i) => `
       <img src="${img.src}" alt="${img.alt}" loading="lazy" decoding="async"
-           class="${img.tall ? "tall" : ""}" data-index="${i}">
-    `).join("");
+           class="${img.tall ? "tall" : ""}" data-index="${i}">`
+    ).join("");
   }
 
   function initLightbox() {
     const lightbox = $("#lightbox");
-    const lbImage = $("#lbImage");
+    const lbImage  = $("#lbImage");
     const lbCounter = $("#lbCounter");
     if (!lightbox) return;
 
     const open = (index) => {
-      galleryIndex = index;
-      update();
+      galleryIndex = index; update();
       lightbox.classList.add("open");
       lightbox.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
@@ -141,8 +132,7 @@
     };
     const update = () => {
       const item = GALLERY_IMAGES[galleryIndex];
-      lbImage.src = item.src;
-      lbImage.alt = item.alt;
+      lbImage.src = item.src; lbImage.alt = item.alt;
       lbCounter.textContent = `${galleryIndex + 1} / ${GALLERY_IMAGES.length}`;
     };
     const next = () => { galleryIndex = (galleryIndex + 1) % GALLERY_IMAGES.length; update(); };
@@ -152,20 +142,16 @@
       const img = e.target.closest("img[data-index]");
       if (img) open(parseInt(img.dataset.index, 10));
     });
-
     $("#lbClose").addEventListener("click", close);
     $("#lbNext").addEventListener("click", next);
     $("#lbPrev").addEventListener("click", prev);
     lightbox.addEventListener("click", (e) => { if (e.target === lightbox) close(); });
-
     document.addEventListener("keydown", (e) => {
       if (!lightbox.classList.contains("open")) return;
       if (e.key === "Escape") close();
       if (e.key === "ArrowRight") next();
       if (e.key === "ArrowLeft") prev();
     });
-
-    // Swipe en el lightbox
     let touchStartX = 0;
     lightbox.addEventListener("touchstart", (e) => { touchStartX = e.changedTouches[0].clientX; }, { passive: true });
     lightbox.addEventListener("touchend", (e) => {
@@ -174,23 +160,24 @@
     }, { passive: true });
   }
 
-  /* ---------- VIDEO MODAL (no fullscreen nativo) ---------- */
+  /* ---------- VIDEO MODAL ---------- */
   function initVideoModal() {
-    const modal = $("#videoModal");
+    const modal      = $("#videoModal");
     const modalVideo = $("#modalVideo");
-    const overlay = $("#videoModalOverlay");
-    const closeBtn = $("#videoModalClose");
+    const overlay    = $("#videoModalOverlay");
+    const closeBtn   = $("#videoModalClose");
     if (!modal) return;
 
     const open = (src) => {
-      // TODO: reemplazar las rutas data-video por los videos reales (mp4 optimizado, H.264)
+      // TODO: reemplaza las rutas data-video de cada .video-card en index.html con los
+      // mp4 reales de Calixto (formato H.264, máx 20MB, preferiblemente 720p vertical).
       modalVideo.src = src;
       modal.classList.add("open");
       modal.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
       modalVideo.muted = true;
-      const playPromise = modalVideo.play();
-      if (playPromise && playPromise.catch) playPromise.catch(() => {});
+      const p = modalVideo.play();
+      if (p && p.catch) p.catch(() => {});
     };
     const close = () => {
       modal.classList.remove("open");
@@ -201,9 +188,7 @@
       modalVideo.load();
     };
 
-    $$(".video-card").forEach(card => {
-      card.addEventListener("click", () => open(card.dataset.video));
-    });
+    $$(".video-card").forEach(card => card.addEventListener("click", () => open(card.dataset.video)));
     closeBtn.addEventListener("click", close);
     overlay.addEventListener("click", close);
     document.addEventListener("keydown", (e) => {
@@ -211,19 +196,17 @@
     });
   }
 
-  /* ---------- VIDEO SLIDER DOTS ---------- */
+  /* ---------- VIDEO DOTS ---------- */
   function initVideoDots() {
-    const slider = $("#videoSlider");
+    const slider   = $("#videoSlider");
     const dotsWrap = $("#videoDots");
     if (!slider || !dotsWrap) return;
     const cards = $$(".video-card", slider);
     dotsWrap.innerHTML = cards.map((_, i) => `<span class="${i === 0 ? "active" : ""}"></span>`).join("");
     const dots = $$("span", dotsWrap);
-
     let ticking = false;
     slider.addEventListener("scroll", () => {
-      if (ticking) return;
-      ticking = true;
+      if (ticking) return; ticking = true;
       requestAnimationFrame(() => {
         const scrollCenter = slider.scrollLeft + slider.clientWidth / 2;
         let closest = 0, min = Infinity;
@@ -240,67 +223,52 @@
 
   /* ---------- AUDIO PLAYER ---------- */
   function initAudioPlayer() {
-    const audio = $("#audioEl");
+    const audio      = $("#audioEl");
     const playToggle = $("#playToggle");
-    const iconPlay = $("#iconPlay");
-    const iconPause = $("#iconPause");
-    const waveform = $("#waveform");
+    const iconPlay   = $("#iconPlay");
+    const iconPause  = $("#iconPause");
+    const waveform   = $("#waveform");
     const trackTitle = $("#playerTrack");
     const timeCurrent = $("#timeCurrent");
-    const timeTotal = $("#timeTotal");
-    const items = $$(".track-item");
+    const timeTotal   = $("#timeTotal");
+    const items       = $$(".track-item");
     if (!audio) return;
 
-    // Construir barras del waveform
-    const barCount = 28;
-    waveform.innerHTML = Array.from({ length: barCount })
-      .map(() => `<span style="height:${20 + Math.random() * 80}%"></span>`).join("");
+    waveform.innerHTML = Array.from({ length: 28 }, () =>
+      `<span style="height:${20 + Math.random() * 80}%;animation-delay:${Math.random().toFixed(2)}s"></span>`
+    ).join("");
 
     const fmt = (s) => {
       if (!isFinite(s)) return "0:00";
-      const m = Math.floor(s / 60);
-      const sec = Math.floor(s % 60).toString().padStart(2, "0");
-      return `${m}:${sec}`;
+      return `${Math.floor(s / 60)}:${Math.floor(s % 60).toString().padStart(2, "0")}`;
     };
 
     const loadTrack = (item, autoplay = false) => {
       items.forEach(i => i.classList.remove("active"));
       item.classList.add("active");
-      // TODO: reemplazar data-src por los clips de audio reales (mp3)
+      // TODO: reemplaza data-src en cada .track-item de index.html con los
+      // clips de audio reales de Calixto (mp3, 128-192kbps).
       audio.src = item.dataset.src;
       trackTitle.textContent = item.dataset.title;
       if (autoplay) audio.play().catch(() => showToast("Agrega el clip de audio real para reproducir 🎵"));
     };
 
-    items.forEach(item => {
-      item.addEventListener("click", () => loadTrack(item, true));
-    });
+    items.forEach(item => item.addEventListener("click", () => loadTrack(item, true)));
 
     playToggle.addEventListener("click", () => {
       if (!audio.src) loadTrack(items[0]);
-      if (audio.paused) {
-        audio.play().catch(() => showToast("Agrega el clip de audio real para reproducir 🎵"));
-      } else {
-        audio.pause();
-      }
+      audio.paused
+        ? audio.play().catch(() => showToast("Agrega el clip de audio real para reproducir 🎵"))
+        : audio.pause();
     });
 
-    audio.addEventListener("play", () => {
-      iconPlay.style.display = "none";
-      iconPause.style.display = "block";
-      waveform.classList.add("playing");
-    });
-    audio.addEventListener("pause", () => {
-      iconPlay.style.display = "block";
-      iconPause.style.display = "none";
-      waveform.classList.remove("playing");
-    });
+    audio.addEventListener("play",  () => { iconPlay.style.display="none"; iconPause.style.display="block"; waveform.classList.add("playing"); });
+    audio.addEventListener("pause", () => { iconPlay.style.display="block"; iconPause.style.display="none"; waveform.classList.remove("playing"); });
     audio.addEventListener("loadedmetadata", () => { timeTotal.textContent = fmt(audio.duration); });
     audio.addEventListener("timeupdate", () => { timeCurrent.textContent = fmt(audio.currentTime); });
     audio.addEventListener("ended", () => {
-      const activeIndex = items.findIndex(i => i.classList.contains("active"));
-      const next = items[activeIndex + 1] || items[0];
-      loadTrack(next, true);
+      const ai = items.findIndex(i => i.classList.contains("active"));
+      loadTrack(items[ai + 1] || items[0], true);
     });
   }
 
@@ -309,37 +277,27 @@
     const btn = $("#qaShare");
     if (!btn) return;
     btn.addEventListener("click", async () => {
-      const shareData = {
-        title: "Calixto Acordeón Mágico",
-        text: "Mira la tarjeta digital de Calixto Acordeón Mágico 🎶",
-        url: window.location.href
-      };
+      const data = { title: "Calixto Acordeón Mágico", text: "Mira la tarjeta digital de Calixto Acordeón Mágico 🎶", url: window.location.href };
       if (navigator.share) {
-        try { await navigator.share(shareData); }
-        catch (err) { /* usuario canceló, sin acción */ }
+        try { await navigator.share(data); } catch {}
       } else {
-        try {
-          await navigator.clipboard.writeText(window.location.href);
-          showToast("Enlace copiado ✅");
-        } catch (err) {
-          showToast("No se pudo copiar el enlace");
-        }
+        try { await navigator.clipboard.writeText(window.location.href); showToast("Enlace copiado ✅"); }
+        catch { showToast("No se pudo copiar el enlace"); }
       }
     });
   }
 
-  /* ---------- GUARDAR CONTACTO (vCard) ---------- */
+  /* ---------- GUARDAR CONTACTO ---------- */
   function initSaveContact() {
-    const btn = $("#qaContact");
+    const btn  = $("#qaContact");
     const link = $("#vcardLink");
     if (!btn || !link) return;
     btn.addEventListener("click", () => {
       const vcard = [
-        "BEGIN:VCARD",
-        "VERSION:3.0",
+        "BEGIN:VCARD", "VERSION:3.0",
         "N:;Calixto Acordeón Mágico;;;",
         "FN:Calixto Acordeón Mágico",
-        "ORG:KONFÍO ZINC",
+        "ORG:Calixto Acordeón Mágico",
         "TITLE:Acordeonista profesional y cantante",
         "TEL;TYPE=CELL:+573157866859",
         "EMAIL:calixtoacordeonmagico@gmail.com",
@@ -348,7 +306,7 @@
         "END:VCARD"
       ].join("\n");
       const blob = new Blob([vcard], { type: "text/vcard" });
-      const url = URL.createObjectURL(blob);
+      const url  = URL.createObjectURL(blob);
       link.setAttribute("href", url);
       link.click();
       setTimeout(() => URL.revokeObjectURL(url), 4000);
@@ -356,20 +314,17 @@
     });
   }
 
-  /* ---------- FAB VISIBILITY ---------- */
+  /* ---------- FAB ---------- */
   function initFab() {
-    const fab = $("#fabWhatsapp");
+    const fab  = $("#fabWhatsapp");
     const hero = $("#hero");
     if (!fab || !hero) return;
-    const threshold = hero.offsetHeight * 0.6;
-    const onScroll = () => {
-      fab.classList.toggle("show", window.scrollY > threshold);
-    };
+    const onScroll = () => fab.classList.toggle("show", window.scrollY > hero.offsetHeight * 0.6);
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
   }
 
-  /* ---------- FOOTER YEAR ---------- */
+  /* ---------- YEAR ---------- */
   function initYear() {
     const el = $("#year");
     if (el) el.textContent = new Date().getFullYear();
