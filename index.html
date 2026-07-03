@@ -44,6 +44,7 @@
     flex-direction: column;
     background-color: #ffffff;
     box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
+    position: relative;
   }
   @media (min-width: 450px){
     .card-container{
@@ -55,9 +56,37 @@
     }
   }
 
-  /* ---------------- HEADER / TOP BANNER ---------------- */
+  /* ---------------- TOP HEADER (logo + tagline, nunca se cruza con la foto) ---------------- */
+  .top-header{
+    position: relative;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px 0;
+    background: var(--navy);
+  }
+  .brand-logo{
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    object-fit: cover;
+    background: #fff;
+    flex-shrink: 0;
+  }
+  .brand-mark{
+    color: var(--gold-light);
+    font-size: 9.5px;
+    line-height: 1.35;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    max-width: 220px;
+  }
+
+  /* ---------------- HEADER / TOP BANNER (foto) ---------------- */
   .main-bg{
-    height: 168px;
+    height: 150px;
     background: radial-gradient(circle at 15% 20%, var(--navy-3) 0%, var(--navy) 55%, #071227 100%);
     position: relative;
     overflow: hidden;
@@ -69,25 +98,19 @@
       radial-gradient(circle at 88% 15%, rgba(201,151,46,0.35) 0%, transparent 45%),
       radial-gradient(circle at 5% 90%, rgba(201,151,46,0.18) 0%, transparent 40%);
   }
-  .brand-logo{
+  /* particulas doradas flotantes, decorativas */
+  .particle{
     position:absolute;
-    top: 16px; left: 16px;
-    width: 46px; height: 46px;
-    border-radius: 50%;
-    border: 2px solid var(--gold);
-    object-fit: cover;
-    background: #fff;
-    z-index: 2;
+    width:4px; height:4px;
+    background: var(--gold-light);
+    border-radius:50%;
+    opacity:.55;
+    animation: floatUp 6s ease-in-in infinite;
   }
-  .brand-mark{
-    position:absolute;
-    top: 22px; left: 68px;
-    color: var(--gold-light);
-    font-size: 10.5px;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    font-weight: 600;
-    z-index: 2;
+  @keyframes floatUp{
+    0%{ transform: translateY(0) scale(1); opacity:.55; }
+    50%{ opacity:.9; }
+    100%{ transform: translateY(-40px) scale(.4); opacity:0; }
   }
 
   .content-section{
@@ -100,16 +123,32 @@
     flex-grow: 1;
   }
 
+  /* ---------------- FOTO DE PERFIL ---------------- */
   .profile-container{
     position: relative;
     width: 140px;
     height: 140px;
-    margin-top: -95px;
+    margin: 0 auto;
+    margin-top: -80px;
+  }
+  .profile-ring{
+    position:absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    opacity: .6;
+    animation: ringPulse 2.6s ease-in-out infinite;
+  }
+  @keyframes ringPulse{
+    0%,100%{ transform: scale(1); opacity:.55; }
+    50%{ transform: scale(1.08); opacity:.05; }
   }
   .profile-pic{
     width: 100%; height: 100%;
     border: 5px solid var(--gold);
-    box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+    box-shadow: 0 10px 26px rgba(0,0,0,0.4);
+    position: relative;
+    z-index: 2;
   }
   .verification-badge{
     position: absolute;
@@ -121,7 +160,61 @@
     display: flex; align-items: center; justify-content: center;
     border: 3px solid var(--navy-3);
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    z-index: 3;
   }
+
+  .online-badge{
+    display:inline-flex; align-items:center; gap:6px;
+    background: rgba(37,211,102,0.12);
+    border: 1px solid rgba(37,211,102,0.5);
+    color: #4ee08a;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 999px;
+  }
+  .online-dot{
+    width:7px; height:7px; border-radius:50%;
+    background:#25D366;
+    box-shadow: 0 0 0 rgba(37,211,102,.6);
+    animation: dotPulse 1.8s ease-in-out infinite;
+  }
+  @keyframes dotPulse{
+    0%{ box-shadow:0 0 0 0 rgba(37,211,102,.6); }
+    70%{ box-shadow:0 0 0 6px rgba(37,211,102,0); }
+    100%{ box-shadow:0 0 0 0 rgba(37,211,102,0); }
+  }
+
+  /* nombre con brillo dorado */
+  .shine-name{
+    background: linear-gradient(100deg, #ffffff 30%, var(--gold-light) 45%, #ffffff 60%);
+    background-size: 250% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shineMove 3.2s ease-in-out infinite;
+  }
+  @keyframes shineMove{
+    0%{ background-position: 100% 0; }
+    100%{ background-position: -100% 0; }
+  }
+
+  /* ---------------- ENTRADA ANIMADA (wow) ---------------- */
+  .reveal{
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp .7s ease forwards;
+  }
+  @keyframes fadeUp{
+    to{ opacity: 1; transform: translateY(0); }
+  }
+  .d1{ animation-delay: .05s; }
+  .d2{ animation-delay: .15s; }
+  .d3{ animation-delay: .25s; }
+  .d4{ animation-delay: .35s; }
+  .d5{ animation-delay: .45s; }
+  .d6{ animation-delay: .55s; }
+  .d7{ animation-delay: .65s; }
 
   /* ---------------- BOTONES ---------------- */
   .action-btn{
@@ -135,12 +228,18 @@
     transform: translateY(-3px);
     box-shadow: 0 10px 22px rgba(201,151,46,0.4);
   }
+  .action-btn:active{ transform: scale(.97); }
   .action-btn.whatsapp-btn{
     background-color: #25D366;
     color: #ffffff;
+    animation: glowPulse 2.4s ease-in-out infinite;
+  }
+  @keyframes glowPulse{
+    0%,100%{ box-shadow: 0 4px 15px rgba(37,211,102,0.35); }
+    50%{ box-shadow: 0 4px 26px rgba(37,211,102,0.65); }
   }
   .action-btn.whatsapp-btn:hover{
-    box-shadow: 0 10px 22px rgba(37,211,102,0.4);
+    box-shadow: 0 10px 22px rgba(37,211,102,0.5);
   }
 
   .social-btn{
@@ -154,6 +253,7 @@
     background-color: rgba(201,151,46,0.16);
     transform: scale(1.04);
   }
+  .social-btn:active{ transform: scale(.96); }
   .social-btn i{ color: var(--gold-light); }
   .social-btn.brand-whatsapp i{ color: #25D366; }
 
@@ -248,14 +348,6 @@
   .benefit-row{ display:flex; gap:.75rem; align-items:flex-start; }
   .benefit-row i{ color: var(--gold); margin-top: 2px; }
 
-  /* galería */
-  .gallery-grid{ display:grid; grid-template-columns: repeat(2,1fr); gap:.6rem; }
-  .gallery-grid img{
-    width:100%; aspect-ratio: 1/1; object-fit: cover;
-    border-radius: 10px; cursor: pointer;
-    border: 1px solid #eee;
-  }
-
   /* testimonios */
   .testimonial-card{
     background: #FAF7EF;
@@ -264,7 +356,69 @@
     padding: 1rem;
   }
 
-  /* lightbox de galería */
+  /* ---------------- CARRUSEL DE GALERÍA ---------------- */
+  .carousel{
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #eee;
+    background: #000;
+  }
+  .carousel-track{
+    display: flex;
+    transition: transform .45s cubic-bezier(.4,0,.2,1);
+  }
+  .carousel-slide{
+    min-width: 100%;
+    cursor: pointer;
+  }
+  .carousel-slide img{
+    width: 100%;
+    display: block;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+  }
+  .carousel-arrow{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: rgba(10,31,68,0.55);
+    color: #fff;
+    border: 1px solid rgba(201,151,46,0.6);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: all .2s ease;
+    z-index: 4;
+  }
+  .carousel-arrow:hover{ background: var(--gold); color: var(--navy); }
+  .carousel-arrow.left{ left: 10px; }
+  .carousel-arrow.right{ right: 10px; }
+  .carousel-dots{
+    display: flex; justify-content: center; gap: 6px;
+    margin-top: .75rem;
+  }
+  .carousel-dot{
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #d8d8d8;
+    cursor: pointer;
+    transition: all .25s ease;
+  }
+  .carousel-dot.active{
+    background: var(--gold);
+    width: 20px;
+    border-radius: 4px;
+  }
+  .carousel-caption{
+    text-align: center;
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: .5rem;
+    font-weight: 500;
+  }
+
+  /* lightbox de galería (vista ampliada) */
   .lightbox{
     position: fixed; inset:0;
     background: rgba(6,15,33,0.94);
@@ -311,33 +465,46 @@
 
 <div class="card-container">
 
-  <!-- ================= BANNER SUPERIOR ================= -->
-  <div class="main-bg">
+  <!-- ================= TOP HEADER: logo + tagline (zona propia, sin cruce) ================= -->
+  <div class="top-header">
     <img src="assets/img/logo.jpg" alt="Logo Lizeth Lozano" class="brand-logo">
-    <span class="brand-mark">Confianza · Organización · Resultados</span>
+    <span class="brand-mark">Confianza · Organización<br>· Resultados</span>
+  </div>
+
+  <!-- ================= BANNER (fondo decorativo) ================= -->
+  <div class="main-bg">
+    <span class="particle" style="left:12%; top:70%; animation-delay:.2s;"></span>
+    <span class="particle" style="left:30%; top:40%; animation-delay:1.4s;"></span>
+    <span class="particle" style="left:78%; top:60%; animation-delay:.8s;"></span>
+    <span class="particle" style="left:60%; top:25%; animation-delay:2.1s;"></span>
+    <span class="particle" style="left:90%; top:75%; animation-delay:2.8s;"></span>
   </div>
 
   <!-- ================= CONTENIDO PRINCIPAL (única pantalla) ================= -->
   <div class="content-section">
     <div class="flex flex-col items-center px-6 text-center">
 
-      <div class="profile-container">
+      <div class="profile-container reveal d1">
+        <span class="profile-ring"></span>
         <img src="assets/img/perfil.jpg" alt="Lizeth Lozano, Contadora Pública" class="profile-pic object-cover rounded-full">
         <div class="verification-badge"><i class="fas fa-check text-sm"></i></div>
       </div>
 
-      <h1 class="text-2xl font-extrabold text-white mt-4 tracking-tight">Lizeth Lozano</h1>
-      <p class="text-base font-semibold mt-1" style="color:var(--gold-light);">Contadora Pública</p>
-      <p class="text-white opacity-90 mt-3 max-w-sm italic text-sm">"Tu tranquilidad, mi compromiso."</p>
+      <h1 class="text-2xl font-extrabold mt-4 tracking-tight shine-name reveal d2">Lizeth Lozano</h1>
+      <p class="text-base font-semibold mt-1 reveal d2" style="color:var(--gold-light);">Contadora Pública</p>
 
-      <div class="flex flex-wrap gap-2 justify-center mt-4">
+      <span class="online-badge mt-3 reveal d3"><span class="online-dot"></span>Disponible para atenderte ahora</span>
+
+      <p class="text-white opacity-90 mt-3 max-w-sm italic text-sm reveal d3">"Tu tranquilidad, mi compromiso."</p>
+
+      <div class="flex flex-wrap gap-2 justify-center mt-4 reveal d4">
         <span class="text-[11px] text-white px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.08); border:1px solid rgba(201,151,46,0.4);">Toda Colombia</span>
         <span class="text-[11px] text-white px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.08); border:1px solid rgba(201,151,46,0.4);">Colombianos en el exterior</span>
         <span class="text-[11px] text-white px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.08); border:1px solid rgba(201,151,46,0.4);">100% Virtual</span>
       </div>
 
       <!-- Botones principales -->
-      <div class="flex gap-3 w-full max-w-xs mx-auto mt-6">
+      <div class="flex gap-3 w-full max-w-xs mx-auto mt-6 reveal d5">
         <div id="whatsapp-btn" class="action-btn whatsapp-btn flex-1 flex items-center justify-center gap-2 font-semibold py-3 rounded-full text-sm">
           <i class="fab fa-whatsapp text-lg"></i>
           <span>WhatsApp</span>
@@ -348,10 +515,10 @@
         </div>
       </div>
 
-      <p class="text-white opacity-70 mt-6 text-center text-xs">Toca los íconos para ver más</p>
+      <p class="text-white opacity-70 mt-6 text-center text-xs reveal d6">Toca los íconos para ver más</p>
 
       <!-- Grid de accesos (todo abre en modal, sin scroll largo) -->
-      <div class="grid grid-cols-4 gap-2.5 w-full max-w-sm mx-auto mt-3">
+      <div class="grid grid-cols-4 gap-2.5 w-full max-w-sm mx-auto mt-3 reveal d6">
         <div id="services-btn" class="social-btn flex flex-col justify-center items-center py-2.5 w-full h-[72px] rounded-2xl">
           <i class="fas fa-briefcase text-xl"></i>
           <span class="text-[10px] mt-1.5 font-medium leading-tight text-center">Servicios</span>
@@ -386,7 +553,7 @@
         </div>
       </div>
 
-      <div id="install-btn" class="text-white opacity-70 mt-6 text-center cursor-pointer hover:opacity-100 transition underline text-xs">
+      <div id="install-btn" class="text-white opacity-70 mt-6 text-center cursor-pointer hover:opacity-100 transition underline text-xs reveal d7">
         ¿Cómo instalar esta tarjeta en mi celular?
       </div>
     </div>
@@ -473,7 +640,7 @@
   </div>
 </div>
 
-<!-- ===================== MODAL: GALERÍA ===================== -->
+<!-- ===================== MODAL: GALERÍA (CARRUSEL DINÁMICO) ===================== -->
 <div id="gallery-modal" class="modal-overlay">
   <div class="modal-content">
     <div class="modal-header">
@@ -481,14 +648,20 @@
       <button class="modal-close-btn">&times;</button>
     </div>
     <div class="modal-body">
-      <div class="gallery-grid" id="galleryGrid">
-        <img src="assets/img/promos/promo-rut.jpg" alt="Actualización de RUT" data-index="0">
-        <img src="assets/img/promos/promo-planeacion-tributaria.jpg" alt="Planeación tributaria" data-index="1">
-        <img src="assets/img/promos/promo-declaracion-renta.jpg" alt="Declaración de renta" data-index="2">
-        <img src="assets/img/promos/promo-atencion-virtual.jpg" alt="Atención virtual en toda Colombia" data-index="3">
-        <img src="assets/img/promos/promo-certificado-ingresos.jpg" alt="Certificado de ingresos" data-index="4">
-        <img src="assets/img/promos/promo-declara-renta-preguntas.jpg" alt="¿Debes declarar renta?" data-index="5">
+      <div class="carousel" id="carousel">
+        <div class="carousel-track" id="carouselTrack">
+          <div class="carousel-slide" data-index="0"><img src="assets/img/promos/promo-rut.jpg" alt="Actualización de RUT"></div>
+          <div class="carousel-slide" data-index="1"><img src="assets/img/promos/promo-planeacion-tributaria.jpg" alt="Planeación tributaria"></div>
+          <div class="carousel-slide" data-index="2"><img src="assets/img/promos/promo-declaracion-renta.jpg" alt="Declaración de renta"></div>
+          <div class="carousel-slide" data-index="3"><img src="assets/img/promos/promo-atencion-virtual.jpg" alt="Atención virtual en toda Colombia"></div>
+          <div class="carousel-slide" data-index="4"><img src="assets/img/promos/promo-certificado-ingresos.jpg" alt="Certificado de ingresos"></div>
+          <div class="carousel-slide" data-index="5"><img src="assets/img/promos/promo-declara-renta-preguntas.jpg" alt="¿Debes declarar renta?"></div>
+        </div>
+        <button class="carousel-arrow left" id="carouselPrev" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+        <button class="carousel-arrow right" id="carouselNext" aria-label="Siguiente"><i class="fas fa-chevron-right"></i></button>
       </div>
+      <div class="carousel-dots" id="carouselDots"></div>
+      <p class="carousel-caption">Toca la imagen para verla en pantalla completa</p>
     </div>
   </div>
 </div>
@@ -563,7 +736,7 @@
   </div>
 </div>
 
-<!-- ===================== LIGHTBOX GALERÍA ===================== -->
+<!-- ===================== LIGHTBOX PANTALLA COMPLETA ===================== -->
 <div class="lightbox" id="lightbox">
   <button class="lightbox-close" id="lightboxClose"><i class="fas fa-times"></i></button>
   <button class="lightbox-nav lightbox-prev" id="lightboxPrev"><i class="fas fa-chevron-left"></i></button>
@@ -598,11 +771,11 @@
   }
 
   /* --------- Helper genérico para modales simples --------- */
-  function wireModal(btnId, modalId){
+  function wireModal(btnId, modalId, onOpen){
     const btn = document.getElementById(btnId);
     const modal = document.getElementById(modalId);
     if(!btn || !modal) return;
-    const open = () => modal.classList.add('active');
+    const open = () => { modal.classList.add('active'); if(onOpen) onOpen(); };
     const close = () => modal.classList.remove('active');
     btn.addEventListener('click', open);
     modal.querySelector('.modal-close-btn')?.addEventListener('click', close);
@@ -611,10 +784,10 @@
 
   wireModal('services-btn', 'services-modal');
   wireModal('benefits-btn', 'benefits-modal');
-  wireModal('gallery-btn', 'gallery-modal');
   wireModal('testimonials-btn', 'testimonials-modal');
   wireModal('coverage-btn', 'coverage-modal');
   wireModal('install-btn', 'install-modal');
+  wireModal('gallery-btn', 'gallery-modal', () => startAutoplay());
 
   /* --------- WhatsApp --------- */
   function abrirWhatsapp(){
@@ -669,36 +842,85 @@
   }
   document.getElementById('save-contact-btn')?.addEventListener('click', generarVCard);
 
-  /* --------- Galería + Lightbox --------- */
-  const galleryImgs = Array.from(document.querySelectorAll('#galleryGrid img'));
+  /* --------- CARRUSEL DE GALERÍA --------- */
+  const track = document.getElementById('carouselTrack');
+  const slides = Array.from(document.querySelectorAll('.carousel-slide'));
+  const dotsWrap = document.getElementById('carouselDots');
+  const prevBtn = document.getElementById('carouselPrev');
+  const nextBtn = document.getElementById('carouselNext');
+  let cIndex = 0;
+  let autoplayTimer = null;
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('span');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => { goTo(i); restartAutoplay(); });
+    dotsWrap.appendChild(dot);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  function goTo(i){
+    cIndex = (i + slides.length) % slides.length;
+    track.style.transform = `translateX(-${cIndex * 100}%)`;
+    dots.forEach((d, idx) => d.classList.toggle('active', idx === cIndex));
+  }
+  function nextSlide(){ goTo(cIndex + 1); }
+  function prevSlide(){ goTo(cIndex - 1); }
+
+  function startAutoplay(){
+    stopAutoplay();
+    autoplayTimer = setInterval(nextSlide, 4200);
+  }
+  function stopAutoplay(){ if(autoplayTimer) clearInterval(autoplayTimer); }
+  function restartAutoplay(){ startAutoplay(); }
+
+  prevBtn?.addEventListener('click', () => { prevSlide(); restartAutoplay(); });
+  nextBtn?.addEventListener('click', () => { nextSlide(); restartAutoplay(); });
+
+  document.getElementById('gallery-modal')?.querySelector('.modal-close-btn')
+    ?.addEventListener('click', stopAutoplay);
+
+  /* swipe táctil */
+  let touchStartX = 0;
+  track?.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, {passive:true});
+  track?.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if(Math.abs(dx) > 40){
+      if(dx < 0) nextSlide(); else prevSlide();
+      restartAutoplay();
+    }
+  }, {passive:true});
+
+  /* tocar la imagen -> lightbox pantalla completa */
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightboxImg');
-  let currentIndex = 0;
+  let lbIndex = 0;
 
   function openLightbox(i){
-    currentIndex = i;
+    lbIndex = i;
     updateLightbox();
     lightbox.classList.add('open');
+    stopAutoplay();
   }
   function closeLightbox(){ lightbox.classList.remove('open'); }
   function updateLightbox(){
-    const item = galleryImgs[currentIndex];
-    lightboxImg.src = item.getAttribute('src');
-    lightboxImg.alt = item.getAttribute('alt');
+    const img = slides[lbIndex].querySelector('img');
+    lightboxImg.src = img.getAttribute('src');
+    lightboxImg.alt = img.getAttribute('alt');
   }
-  function nextImg(){ currentIndex = (currentIndex+1) % galleryImgs.length; updateLightbox(); }
-  function prevImg(){ currentIndex = (currentIndex-1+galleryImgs.length) % galleryImgs.length; updateLightbox(); }
+  function lbNext(){ lbIndex = (lbIndex+1) % slides.length; updateLightbox(); }
+  function lbPrev(){ lbIndex = (lbIndex-1+slides.length) % slides.length; updateLightbox(); }
 
-  galleryImgs.forEach((img, i) => img.addEventListener('click', () => openLightbox(i)));
+  slides.forEach((slide, i) => slide.addEventListener('click', () => openLightbox(i)));
   document.getElementById('lightboxClose')?.addEventListener('click', closeLightbox);
-  document.getElementById('lightboxNext')?.addEventListener('click', nextImg);
-  document.getElementById('lightboxPrev')?.addEventListener('click', prevImg);
+  document.getElementById('lightboxNext')?.addEventListener('click', lbNext);
+  document.getElementById('lightboxPrev')?.addEventListener('click', lbPrev);
   lightbox?.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
   document.addEventListener('keydown', (e) => {
     if(!lightbox.classList.contains('open')) return;
     if(e.key === 'Escape') closeLightbox();
-    if(e.key === 'ArrowRight') nextImg();
-    if(e.key === 'ArrowLeft') prevImg();
+    if(e.key === 'ArrowRight') lbNext();
+    if(e.key === 'ArrowLeft') lbPrev();
   });
 
 })();
