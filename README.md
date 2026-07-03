@@ -1,60 +1,42 @@
-# Calixto Acordeón Mágico — Tarjeta Digital Premium
+# Tarjeta Digital Premium — Lizeth Lozano (Contadora Pública)
 
-Proyecto de KONFÍO ZINC. Tarjeta digital premium (NO landing page) para el artista
-Calixto Acordeón Mágico, lista para publicar en GitHub Pages.
+Tarjeta digital de una sola página. HTML5 + CSS3 + JavaScript puro. Sin frameworks (sin Bootstrap, React, Vue, Angular ni Tailwind).
 
-## Estructura
+## Estructura entregada
 
 ```
-/
-├── index.html
-├── style.css
-├── script.js
-├── manifest.json
-└── assets/
-    ├── img/
-    │   ├── hero-calixto.jpg
-    │   ├── og-image.jpg
-    │   ├── favicon-32.png
-    │   ├── icon-192.png
-    │   ├── icon-512.png
-    │   └── gallery/
-    │       └── gallery-1.jpg ... gallery-8.jpg
-    ├── video/
-    │   └── (presentacion-1.mp4 ... presentacion-4.mp4)
-    └── audio/
-        └── (clip-1.mp3 ... clip-3.mp3)
+index.html
+style.css
+script.js
+assets/img/       → foto de perfil y galería (placeholders a reemplazar)
+assets/icons/      → set de íconos SVG (whatsapp, teléfono, compartir, etc.)
 ```
 
-## Pendiente antes de entregar al cliente final (marcado con // TODO en el código)
+## Antes de publicar — reemplaza esto
 
-1. Reemplazar `assets/img/hero-calixto.jpg` y las 8 imágenes de `assets/img/gallery/`
-   por fotos reales de Calixto (mismo nombre de archivo, o actualizar las rutas en
-   `script.js` dentro de `GALLERY_IMAGES`).
-2. Agregar los videos reales en `assets/video/` (ver `assets/video/LEEME.txt`).
-3. Agregar los clips de audio reales en `assets/audio/` (ver `assets/audio/LEEME.txt`).
-4. Confirmar cifras reales en la sección de estadísticas (`data-count` en `index.html`,
-   sección "Sobre Calixto": años de trayectoria, eventos animados).
-5. Cuando el cliente confirme Instagram/TikTok/YouTube, agregarlos en la sección
-   "Sígueme" (`#redes`) y en "Botones rápidos".
+1. **`assets/img/perfil.svg`** → foto profesional real de Lizeth (recomendado: `perfil.jpg`, cuadrada, mínimo 500×500px). Actualiza el `src` en el `<img id="heroPhoto">` dentro de `index.html`.
+2. **`assets/img/galeria-1.svg` … `galeria-6.svg`** → hasta 6 fotos reales (oficina, atención al cliente, certificaciones, etc.). Mismos nombres de archivo o actualiza los `src` en la sección `#galeria` de `index.html`.
+3. **Datos de contacto** → abre `script.js` y edita el bloque `CONFIG` al inicio del archivo:
+   - `telefono` (WhatsApp/llamadas, formato `57XXXXXXXXXX`)
+   - `telefonoVisible`
+   - `correo`
+   - `ciudad`
+   - `urlTarjeta` (la URL final de GitHub Pages)
+4. En `index.html`, el correo de contacto también aparece en el enlace `mailto:` de la sección de contacto — actualízalo si cambia.
 
 ## Publicar en GitHub Pages
 
-1. Sube todo el contenido de esta carpeta a un repositorio bajo la cuenta `konfiozinc`
-   (por ejemplo: `konfiozinc/calixto-acordeon-magico`).
-2. En el repositorio: Settings → Pages → Source: rama `main`, carpeta `/ (root)`.
-3. La tarjeta quedará disponible en:
-   `https://konfiozinc.github.io/calixto-acordeon-magico/`
+1. Crea el repositorio (ej. `lizeth-lozano`) en la cuenta `konfiozinc`.
+2. Sube todo el contenido de esta carpeta a la raíz del repositorio.
+3. Activa GitHub Pages desde `Settings → Pages → Deploy from branch → main / root`.
+4. La tarjeta quedará disponible en `https://konfiozinc.github.io/lizeth-lozano/`.
 
-## Notas técnicas
+## Funcionalidad incluida
 
-- HTML5 + CSS3 + JavaScript vanilla (ES6), sin frameworks ni dependencias externas
-  (excepto Google Fonts vía CDN).
-- 100% responsive, mobile-first (probado en 360px, 390px, 414px y escalado a desktop).
-- Animaciones con `IntersectionObserver`, respetando `prefers-reduced-motion`.
-- Modal de video propio (no fullscreen nativo del navegador), con botón de cierre,
-  cierre con Esc y cierre al hacer clic fuera.
-- Reproductor de audio personalizado con waveform animado.
-- Botón flotante de WhatsApp con mensaje prellenado.
-- Botón "Compartir" con Web Share API y fallback a copiar enlace.
-- Botón "Guardar contacto" genera un archivo `.vcf` (vCard) descargable.
+- Botón WhatsApp (hero, flotante y sección de contacto) con mensaje predefinido.
+- Botón Guardar Contacto → genera y descarga un archivo `.vcf` (vCard) real.
+- Botón Compartir → usa la Web Share API nativa (o copia el enlace si el navegador no la soporta).
+- Botón Llamar (flotante).
+- Galería con lightbox (visor a pantalla completa, navegación con flechas y teclado).
+- Animaciones suaves de aparición al hacer scroll.
+- 100% responsive (móvil, tablet, escritorio).
