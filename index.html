@@ -4,301 +4,704 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 <title>Lizeth Lozano | Contadora Pública</title>
-<meta name="description" content="Lizeth Lozano — Contadora Pública. Declaración de renta, planeación tributaria, asesoría contable y tributaria para toda Colombia y colombianos en el exterior.">
-<meta name="theme-color" content="#0a1f44">
+<meta name="description" content="Lizeth Lozano — Contadora Pública. Declaración de renta, planeación tributaria, RUT, certificados y asesoría contable. Atención 100% virtual en toda Colombia.">
+<meta name="theme-color" content="#0A1F44">
 
-<!-- Open Graph -->
-<meta property="og:title" content="Lizeth Lozano | Contadora Pública">
-<meta property="og:description" content="Tu tranquilidad, mi compromiso. Asesoría contable y tributaria 100% virtual para toda Colombia.">
-<meta property="og:type" content="profile">
-
+<!-- Carga de Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<link rel="stylesheet" href="style.css">
+<link rel="icon" href="assets/img/logo.jpg">
+
+<style>
+  :root{
+    --navy: #0A1F44;
+    --navy-2: #123166;
+    --navy-3: #0d2a5c;
+    --gold: #C9972E;
+    --gold-light: #E8C168;
+    --ivory: #FAF7EF;
+  }
+
+  body{
+    font-family: 'Montserrat', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #eef1f6;
+  }
+
+  /* ---------------- CONTENEDOR PRINCIPAL (single view) ---------------- */
+  .card-container{
+    width: 100%;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
+  }
+  @media (min-width: 450px){
+    .card-container{
+      max-width: 420px;
+      margin: 2rem auto;
+      min-height: calc(100vh - 4rem);
+      border-radius: 28px;
+      overflow: hidden;
+    }
+  }
+
+  /* ---------------- HEADER / TOP BANNER ---------------- */
+  .main-bg{
+    height: 168px;
+    background: radial-gradient(circle at 15% 20%, var(--navy-3) 0%, var(--navy) 55%, #071227 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .main-bg::before{
+    content:'';
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(circle at 88% 15%, rgba(201,151,46,0.35) 0%, transparent 45%),
+      radial-gradient(circle at 5% 90%, rgba(201,151,46,0.18) 0%, transparent 40%);
+  }
+  .brand-logo{
+    position:absolute;
+    top: 16px; left: 16px;
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    object-fit: cover;
+    background: #fff;
+    z-index: 2;
+  }
+  .brand-mark{
+    position:absolute;
+    top: 22px; left: 68px;
+    color: var(--gold-light);
+    font-size: 10.5px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    font-weight: 600;
+    z-index: 2;
+  }
+
+  .content-section{
+    background: linear-gradient(180deg, var(--navy-3) 0%, var(--navy) 100%);
+    margin-top: -60px;
+    border-top-left-radius: 46px;
+    border-top-right-radius: 46px;
+    position: relative;
+    padding-bottom: 1.75rem;
+    flex-grow: 1;
+  }
+
+  .profile-container{
+    position: relative;
+    width: 140px;
+    height: 140px;
+    margin-top: -95px;
+  }
+  .profile-pic{
+    width: 100%; height: 100%;
+    border: 5px solid var(--gold);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+  }
+  .verification-badge{
+    position: absolute;
+    bottom: 4px; right: 2px;
+    background-color: var(--gold);
+    color: var(--navy);
+    width: 32px; height: 32px;
+    border-radius: 9999px;
+    display: flex; align-items: center; justify-content: center;
+    border: 3px solid var(--navy-3);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+
+  /* ---------------- BOTONES ---------------- */
+  .action-btn{
+    background-color: var(--gold);
+    color: var(--navy);
+    transition: all .3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+    cursor: pointer;
+  }
+  .action-btn:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(201,151,46,0.4);
+  }
+  .action-btn.whatsapp-btn{
+    background-color: #25D366;
+    color: #ffffff;
+  }
+  .action-btn.whatsapp-btn:hover{
+    box-shadow: 0 10px 22px rgba(37,211,102,0.4);
+  }
+
+  .social-btn{
+    background-color: rgba(255,255,255,0.08);
+    color: #ffffff;
+    transition: all .25s ease;
+    cursor: pointer;
+    border: 1px solid rgba(201,151,46,0.25);
+  }
+  .social-btn:hover{
+    background-color: rgba(201,151,46,0.16);
+    transform: scale(1.04);
+  }
+  .social-btn i{ color: var(--gold-light); }
+  .social-btn.brand-whatsapp i{ color: #25D366; }
+
+  .footer-banner{
+    background-color: var(--gold-light);
+    color: var(--navy);
+  }
+
+  /* ---------------- MODALES ---------------- */
+  .modal-overlay{
+    position: fixed; inset: 0;
+    background: rgba(6,15,33,0.72);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 1000;
+    opacity: 0; visibility: hidden;
+    transition: opacity .3s ease, visibility .3s ease;
+    backdrop-filter: blur(5px);
+    padding: 16px;
+  }
+  .modal-overlay.active{ opacity: 1; visibility: visible; }
+  .modal-content{
+    background: #ffffff;
+    border-radius: 20px;
+    max-width: 92%;
+    width: 460px;
+    max-height: 85vh;
+    display: flex; flex-direction: column;
+    position: relative;
+    transform: scale(0.95) translateY(20px);
+    transition: transform .3s ease, opacity .3s ease;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    border: 4px solid var(--gold-light);
+    opacity: 0;
+  }
+  .modal-overlay.active .modal-content{
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+  .modal-header{
+    padding: 1.1rem 1.5rem;
+    border-bottom: 1px solid #f0f4f8;
+    position: relative;
+  }
+  .modal-header-title{
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--navy);
+    max-width: calc(100% - 80px);
+    margin: 0 auto;
+  }
+  .modal-header-title::after{
+    content:'';
+    display:block;
+    width: 46px; height: 4px;
+    background-color: var(--gold);
+    margin: 8px auto 0;
+    border-radius: 2px;
+  }
+  .modal-body{
+    padding: 1.4rem;
+    overflow-y: auto;
+    flex-grow: 1;
+  }
+  .modal-close-btn{
+    position: absolute;
+    top: .65rem; right: .65rem;
+    background: #f0f4f8;
+    color: var(--navy);
+    border-radius: 99px;
+    width: 34px; height: 34px;
+    cursor: pointer; border: none;
+    font-size: 1.4rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .3s ease;
+  }
+  .modal-close-btn:hover{
+    background-color: var(--gold-light);
+    transform: rotate(90deg);
+  }
+
+  /* servicio item dentro del modal */
+  .service-row{ display:flex; gap:.85rem; align-items:flex-start; }
+  .service-row .ic{
+    width: 42px; height: 42px; flex-shrink:0;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%);
+    display:flex; align-items:center; justify-content:center;
+    color: var(--gold-light);
+  }
+
+  .benefit-row{ display:flex; gap:.75rem; align-items:flex-start; }
+  .benefit-row i{ color: var(--gold); margin-top: 2px; }
+
+  /* galería */
+  .gallery-grid{ display:grid; grid-template-columns: repeat(2,1fr); gap:.6rem; }
+  .gallery-grid img{
+    width:100%; aspect-ratio: 1/1; object-fit: cover;
+    border-radius: 10px; cursor: pointer;
+    border: 1px solid #eee;
+  }
+
+  /* testimonios */
+  .testimonial-card{
+    background: #FAF7EF;
+    border-left: 3px solid var(--gold);
+    border-radius: 10px;
+    padding: 1rem;
+  }
+
+  /* lightbox de galería */
+  .lightbox{
+    position: fixed; inset:0;
+    background: rgba(6,15,33,0.94);
+    display:none; align-items:center; justify-content:center;
+    z-index: 1100; padding: 20px;
+  }
+  .lightbox.open{ display:flex; }
+  .lightbox img{
+    max-width: min(90vw, 480px); max-height: 80vh;
+    border-radius: 12px; border: 2px solid var(--gold-light);
+  }
+  .lightbox-close{
+    position:absolute; top:20px; right:20px;
+    width:40px; height:40px; border-radius:50%;
+    background: rgba(255,255,255,0.12); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    border:none; cursor:pointer;
+  }
+  .lightbox-nav{
+    position:absolute; top:50%; transform: translateY(-50%);
+    width:42px; height:42px; border-radius:50%;
+    background: rgba(255,255,255,0.12); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    border:none; cursor:pointer;
+  }
+  .lightbox-prev{ left:14px; }
+  .lightbox-next{ right:14px; }
+
+  /* toast */
+  .toast{
+    position: fixed; left:50%; bottom: 26px;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--navy); color:#fff;
+    padding: 10px 20px; border-radius: 999px;
+    font-size: .82rem; box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    opacity:0; pointer-events:none;
+    transition: opacity .3s ease, transform .3s ease;
+    z-index: 1200; white-space: nowrap;
+  }
+  .toast.show{ opacity:1; transform: translateX(-50%) translateY(0); }
+</style>
 </head>
-<body>
+<body class="bg-gray-200">
 
-<!-- ===================== HERO ===================== -->
-<header class="hero" id="inicio">
-  <div class="hero-bg"></div>
-  <div class="hero-frame"></div>
+<div class="card-container">
 
-  <div class="hero-content">
-    <div class="hero-photo-wrap">
-      <img src="assets/img/perfil.svg" alt="Lizeth Lozano, Contadora Pública" class="hero-photo" id="heroPhoto">
-      <span class="hero-photo-ring"></span>
-    </div>
+  <!-- ================= BANNER SUPERIOR ================= -->
+  <div class="main-bg">
+    <img src="assets/img/logo.jpg" alt="Logo Lizeth Lozano" class="brand-logo">
+    <span class="brand-mark">Confianza · Organización · Resultados</span>
+  </div>
 
-    <p class="hero-eyebrow">Contadora Pública</p>
-    <h1 class="hero-name">Lizeth Lozano</h1>
-    <p class="hero-tagline">“Tu tranquilidad, mi compromiso.”</p>
+  <!-- ================= CONTENIDO PRINCIPAL (única pantalla) ================= -->
+  <div class="content-section">
+    <div class="flex flex-col items-center px-6 text-center">
 
-    <div class="hero-badges">
-      <span class="badge">Toda Colombia</span>
-      <span class="badge">Colombianos en el exterior</span>
-      <span class="badge">100% Virtual</span>
-    </div>
+      <div class="profile-container">
+        <img src="assets/img/perfil.jpg" alt="Lizeth Lozano, Contadora Pública" class="profile-pic object-cover rounded-full">
+        <div class="verification-badge"><i class="fas fa-check text-sm"></i></div>
+      </div>
 
-    <div class="hero-actions">
-      <a href="#" class="btn btn-primary" id="btnWhatsappHero">
-        <img src="assets/icons/whatsapp.svg" class="icon icon-white" alt="">
-        <span>Escribir por WhatsApp</span>
-      </a>
-      <button class="btn btn-outline" id="btnSaveHero">
-        <img src="assets/icons/save-contact.svg" class="icon icon-gold" alt="">
-        <span>Guardar contacto</span>
-      </button>
+      <h1 class="text-2xl font-extrabold text-white mt-4 tracking-tight">Lizeth Lozano</h1>
+      <p class="text-base font-semibold mt-1" style="color:var(--gold-light);">Contadora Pública</p>
+      <p class="text-white opacity-90 mt-3 max-w-sm italic text-sm">"Tu tranquilidad, mi compromiso."</p>
+
+      <div class="flex flex-wrap gap-2 justify-center mt-4">
+        <span class="text-[11px] text-white px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.08); border:1px solid rgba(201,151,46,0.4);">Toda Colombia</span>
+        <span class="text-[11px] text-white px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.08); border:1px solid rgba(201,151,46,0.4);">Colombianos en el exterior</span>
+        <span class="text-[11px] text-white px-3 py-1 rounded-full" style="background:rgba(255,255,255,0.08); border:1px solid rgba(201,151,46,0.4);">100% Virtual</span>
+      </div>
+
+      <!-- Botones principales -->
+      <div class="flex gap-3 w-full max-w-xs mx-auto mt-6">
+        <div id="whatsapp-btn" class="action-btn whatsapp-btn flex-1 flex items-center justify-center gap-2 font-semibold py-3 rounded-full text-sm">
+          <i class="fab fa-whatsapp text-lg"></i>
+          <span>WhatsApp</span>
+        </div>
+        <div id="save-contact-btn" class="action-btn flex-1 flex items-center justify-center gap-2 font-semibold py-3 rounded-full text-sm">
+          <i class="fas fa-user-plus"></i>
+          <span>Guardar</span>
+        </div>
+      </div>
+
+      <p class="text-white opacity-70 mt-6 text-center text-xs">Toca los íconos para ver más</p>
+
+      <!-- Grid de accesos (todo abre en modal, sin scroll largo) -->
+      <div class="grid grid-cols-4 gap-2.5 w-full max-w-sm mx-auto mt-3">
+        <div id="services-btn" class="social-btn flex flex-col justify-center items-center py-2.5 w-full h-[72px] rounded-2xl">
+          <i class="fas fa-briefcase text-xl"></i>
+          <span class="text-[10px] mt-1.5 font-medium leading-tight text-center">Servicios</span>
+        </div>
+        <div id="benefits-btn" class="social-btn flex flex-col justify-center items-center py-2.5 w-full h-[72px] rounded-2xl">
+          <i class="fas fa-star text-xl"></i>
+          <span class="text-[10px] mt-1.5 font-medium leading-tight text-center">Beneficios</span>
+        </div>
+        <div id="gallery-btn" class="social-btn flex flex-col justify-center items-center py-2.5 w-full h-[72px] rounded-2xl">
+          <i class="fas fa-images text-xl"></i>
+          <span class="text-[10px] mt-1.5 font-medium leading-tight text-center">Galería</span>
+        </div>
+        <div id="testimonials-btn" class="social-btn flex flex-col justify-center items-center py-2.5 w-full h-[72px] rounded-2xl">
+          <i class="fas fa-comment-dots text-xl"></i>
+          <span class="text-[10px] mt-1.5 font-medium leading-tight text-center">Testimonios</span>
+        </div>
+        <div id="call-btn" class="social-btn flex flex-col justify-center items-center py-2.5 w-full h-[72px] rounded-2xl">
+          <i class="fas fa-phone-alt text-xl"></i>
+          <span class="text-[10px] mt-1.5 font-medium leading-tight text-center">Llamar</span>
+        </div>
+        <div id="coverage-btn" class="social-btn flex flex-col justify-center items-center py-2.5 w-full h-[72px] rounded-2xl">
+          <i class="fas fa-map-marked-alt text-xl"></i>
+          <span class="text-[10px] mt-1.5 font-medium leading-tight text-center">Cobertura</span>
+        </div>
+        <div id="share-btn" class="social-btn flex flex-col justify-center items-center py-2.5 w-full h-[72px] rounded-2xl">
+          <i class="fas fa-share-alt text-xl"></i>
+          <span class="text-[10px] mt-1.5 font-medium leading-tight text-center">Compartir</span>
+        </div>
+        <div id="whatsapp-grid-btn" class="social-btn brand-whatsapp flex flex-col justify-center items-center py-2.5 w-full h-[72px] rounded-2xl">
+          <i class="fab fa-whatsapp text-xl"></i>
+          <span class="text-[10px] mt-1.5 font-medium leading-tight text-center">WhatsApp</span>
+        </div>
+      </div>
+
+      <div id="install-btn" class="text-white opacity-70 mt-6 text-center cursor-pointer hover:opacity-100 transition underline text-xs">
+        ¿Cómo instalar esta tarjeta en mi celular?
+      </div>
     </div>
   </div>
 
-  <button class="scroll-hint" id="scrollHint" aria-label="Ver más">
-    <span></span>
-  </button>
-</header>
+  <!-- ================= BANNER INFERIOR ================= -->
+  <div class="footer-banner text-center py-3 px-4 font-semibold text-sm">
+    <p>Estoy para ayudarte <i class="fas fa-heart" style="color:var(--navy);"></i></p>
+  </div>
+</div>
 
-<main>
-
-  <!-- ===================== SERVICIOS ===================== -->
-  <section class="section" id="servicios">
-    <div class="section-head">
-      <p class="section-eyebrow">Qué hago por ti</p>
-      <h2 class="section-title">Servicios</h2>
+<!-- ===================== MODAL: SERVICIOS ===================== -->
+<div id="services-modal" class="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="modal-header-title">Mis Servicios</h2>
+      <button class="modal-close-btn">&times;</button>
     </div>
-
-    <div class="services-grid">
-      <article class="service-card">
-        <div class="service-icon"><img src="assets/icons/document.svg" class="icon icon-gold" alt=""></div>
-        <h3>Declaración de renta</h3>
-        <p>Presenta tu declaración a tiempo, sin errores y con la mejor planeación fiscal para tu bolsillo.</p>
-      </article>
-
-      <article class="service-card">
-        <div class="service-icon"><img src="assets/icons/chart.svg" class="icon icon-gold" alt=""></div>
-        <h3>Planeación tributaria</h3>
-        <p>Estrategias legales para optimizar tus impuestos y evitar sorpresas con la DIAN.</p>
-      </article>
-
-      <article class="service-card">
-        <div class="service-icon"><img src="assets/icons/receipt.svg" class="icon icon-gold" alt=""></div>
-        <h3>Actualización de RUT</h3>
-        <p>Trámite ágil y correcto de tu Registro Único Tributario, sin filas ni contratiempos.</p>
-      </article>
-
-      <article class="service-card">
-        <div class="service-icon"><img src="assets/icons/certificate.svg" class="icon icon-gold" alt=""></div>
-        <h3>Certificados de ingresos</h3>
-        <p>Certificados de ingresos y retenciones listos para trámites bancarios, laborales o migratorios.</p>
-      </article>
-
-      <article class="service-card">
-        <div class="service-icon"><img src="assets/icons/handshake.svg" class="icon icon-gold" alt=""></div>
-        <h3>Asesoría contable</h3>
-        <p>Acompañamiento contable claro y cercano para personas naturales y pequeños negocios.</p>
-      </article>
-
-      <article class="service-card">
-        <div class="service-icon"><img src="assets/icons/shield.svg" class="icon icon-gold" alt=""></div>
-        <h3>Asesoría tributaria</h3>
-        <p>Resuelve tus dudas tributarias con respaldo profesional y total tranquilidad.</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- ===================== BENEFICIOS ===================== -->
-  <section class="section section-alt" id="beneficios">
-    <div class="section-head">
-      <p class="section-eyebrow">Por qué elegirme</p>
-      <h2 class="section-title">Beneficios</h2>
-    </div>
-
-    <div class="benefits-list">
-      <div class="benefit-item">
-        <img src="assets/icons/check.svg" class="icon icon-gold" alt="">
-        <div>
-          <h4>Atención personalizada</h4>
-          <p>Cada cliente recibe seguimiento directo y cercano, sin intermediarios.</p>
-        </div>
-      </div>
-      <div class="benefit-item">
-        <img src="assets/icons/check.svg" class="icon icon-gold" alt="">
-        <div>
-          <h4>Profesionalismo</h4>
-          <p>Procesos rigurosos, actualizados y conformes a la normatividad vigente.</p>
-        </div>
-      </div>
-      <div class="benefit-item">
-        <img src="assets/icons/check.svg" class="icon icon-gold" alt="">
-        <div>
-          <h4>Confianza</h4>
-          <p>Tu información y tus finanzas se manejan con total discreción y responsabilidad.</p>
-        </div>
-      </div>
-      <div class="benefit-item">
-        <img src="assets/icons/globe.svg" class="icon icon-gold" alt="">
-        <div>
-          <h4>Cobertura nacional</h4>
-          <p>Atención en todo el territorio colombiano, sin importar la ciudad.</p>
-        </div>
-      </div>
-      <div class="benefit-item">
-        <img src="assets/icons/video.svg" class="icon icon-gold" alt="">
-        <div>
-          <h4>Atención virtual</h4>
-          <p>Todo el proceso 100% en línea, incluso para colombianos en el exterior.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== GALERÍA ===================== -->
-  <section class="section" id="galeria">
-    <div class="section-head">
-      <p class="section-eyebrow">Un vistazo</p>
-      <h2 class="section-title">Galería</h2>
-    </div>
-
-    <div class="gallery-grid" id="galleryGrid">
-      <button class="gallery-item" data-index="0"><img src="assets/img/galeria-1.svg" alt="Galería 1" loading="lazy"></button>
-      <button class="gallery-item" data-index="1"><img src="assets/img/galeria-2.svg" alt="Galería 2" loading="lazy"></button>
-      <button class="gallery-item" data-index="2"><img src="assets/img/galeria-3.svg" alt="Galería 3" loading="lazy"></button>
-      <button class="gallery-item" data-index="3"><img src="assets/img/galeria-4.svg" alt="Galería 4" loading="lazy"></button>
-      <button class="gallery-item" data-index="4"><img src="assets/img/galeria-5.svg" alt="Galería 5" loading="lazy"></button>
-      <button class="gallery-item" data-index="5"><img src="assets/img/galeria-6.svg" alt="Galería 6" loading="lazy"></button>
-    </div>
-  </section>
-
-  <!-- ===================== TESTIMONIOS ===================== -->
-  <section class="section section-alt" id="testimonios">
-    <div class="section-head">
-      <p class="section-eyebrow">Lo que dicen</p>
-      <h2 class="section-title">Testimonios</h2>
-    </div>
-
-    <div class="testimonials-grid">
-      <article class="testimonial-card">
-        <img src="assets/icons/quote.svg" class="icon icon-gold quote-icon" alt="">
-        <p>Lizeth me ayudó a organizar mi declaración de renta sin estrés. Muy clara y puntual en cada paso.</p>
-        <div class="testimonial-author">
-          <span class="author-avatar">MC</span>
+    <div class="modal-body">
+      <div class="space-y-5 text-left">
+        <div class="service-row">
+          <div class="ic"><i class="fas fa-file-invoice-dollar"></i></div>
           <div>
-            <strong>María C.</strong>
-            <span>Bogotá</span>
+            <h3 class="font-semibold text-gray-800 text-sm">Declaración de renta</h3>
+            <p class="text-xs text-gray-500 mt-1">Presenta tu declaración a tiempo, sin errores y con la mejor planeación fiscal.</p>
           </div>
         </div>
-      </article>
-
-      <article class="testimonial-card">
-        <img src="assets/icons/quote.svg" class="icon icon-gold quote-icon" alt="">
-        <p>Vivo en el exterior y me hizo todo el proceso virtual, rápido y con total confianza. Recomendada.</p>
-        <div class="testimonial-author">
-          <span class="author-avatar">JR</span>
+        <div class="service-row">
+          <div class="ic"><i class="fas fa-chart-line"></i></div>
           <div>
-            <strong>Jorge R.</strong>
-            <span>Colombiano en España</span>
+            <h3 class="font-semibold text-gray-800 text-sm">Planeación tributaria</h3>
+            <p class="text-xs text-gray-500 mt-1">Estrategias legales para optimizar tus impuestos y evitar sorpresas con la DIAN.</p>
           </div>
         </div>
-      </article>
-
-      <article class="testimonial-card">
-        <img src="assets/icons/quote.svg" class="icon icon-gold quote-icon" alt="">
-        <p>Su asesoría tributaria me ahorró tiempo y dinero. Profesional, cercana y muy responsable.</p>
-        <div class="testimonial-author">
-          <span class="author-avatar">AP</span>
+        <div class="service-row">
+          <div class="ic"><i class="fas fa-id-card"></i></div>
           <div>
-            <strong>Andrés P.</strong>
-            <span>Medellín</span>
+            <h3 class="font-semibold text-gray-800 text-sm">Actualización de RUT</h3>
+            <p class="text-xs text-gray-500 mt-1">Trámite ágil y correcto de tu Registro Único Tributario.</p>
           </div>
         </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- ===================== CONTACTO ===================== -->
-  <section class="section contact" id="contacto">
-    <div class="section-head">
-      <p class="section-eyebrow">Hablemos</p>
-      <h2 class="section-title">Contacto</h2>
-    </div>
-
-    <div class="contact-grid">
-      <a href="#" class="contact-item" id="contactWhatsapp">
-        <img src="assets/icons/whatsapp.svg" class="icon icon-gold" alt="">
-        <div>
-          <strong>WhatsApp</strong>
-          <span id="contactWhatsappText">+57 300 000 0000</span>
+        <div class="service-row">
+          <div class="ic"><i class="fas fa-certificate"></i></div>
+          <div>
+            <h3 class="font-semibold text-gray-800 text-sm">Certificados de ingresos</h3>
+            <p class="text-xs text-gray-500 mt-1">Listos para trámites bancarios, laborales o migratorios.</p>
+          </div>
         </div>
-      </a>
-
-      <a href="mailto:contacto@lizethlozano.com" class="contact-item">
-        <img src="assets/icons/mail.svg" class="icon icon-gold" alt="">
-        <div>
-          <strong>Correo</strong>
-          <span>contacto@lizethlozano.com</span>
+        <div class="service-row">
+          <div class="ic"><i class="fas fa-handshake"></i></div>
+          <div>
+            <h3 class="font-semibold text-gray-800 text-sm">Asesoría contable</h3>
+            <p class="text-xs text-gray-500 mt-1">Acompañamiento claro y cercano para personas naturales y pequeños negocios.</p>
+          </div>
         </div>
-      </a>
-
-      <div class="contact-item">
-        <img src="assets/icons/location.svg" class="icon icon-gold" alt="">
-        <div>
-          <strong>Ciudad</strong>
-          <span>Colombia</span>
-        </div>
-      </div>
-
-      <div class="contact-item">
-        <img src="assets/icons/globe.svg" class="icon icon-gold" alt="">
-        <div>
-          <strong>Cobertura</strong>
-          <span>Toda Colombia y colombianos en el exterior</span>
+        <div class="service-row">
+          <div class="ic"><i class="fas fa-shield-alt"></i></div>
+          <div>
+            <h3 class="font-semibold text-gray-800 text-sm">Asesoría tributaria</h3>
+            <p class="text-xs text-gray-500 mt-1">Resuelve tus dudas tributarias con respaldo profesional.</p>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
-    <button class="btn btn-primary btn-vcard" id="btnVcard">
-      <img src="assets/icons/save-contact.svg" class="icon icon-white" alt="">
-      <span>Guardar contacto (vCard)</span>
-    </button>
+<!-- ===================== MODAL: BENEFICIOS ===================== -->
+<div id="benefits-modal" class="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="modal-header-title">Beneficios</h2>
+      <button class="modal-close-btn">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="space-y-4 text-left">
+        <div class="benefit-row"><i class="fas fa-check-circle mt-0.5"></i><div><h4 class="font-semibold text-gray-800 text-sm">Atención personalizada</h4><p class="text-xs text-gray-500">Seguimiento directo y cercano, sin intermediarios.</p></div></div>
+        <div class="benefit-row"><i class="fas fa-check-circle mt-0.5"></i><div><h4 class="font-semibold text-gray-800 text-sm">Profesionalismo</h4><p class="text-xs text-gray-500">Procesos rigurosos y conformes a la normatividad vigente.</p></div></div>
+        <div class="benefit-row"><i class="fas fa-check-circle mt-0.5"></i><div><h4 class="font-semibold text-gray-800 text-sm">Confianza</h4><p class="text-xs text-gray-500">Tu información se maneja con total discreción y responsabilidad.</p></div></div>
+        <div class="benefit-row"><i class="fas fa-globe-americas mt-0.5"></i><div><h4 class="font-semibold text-gray-800 text-sm">Cobertura nacional</h4><p class="text-xs text-gray-500">Atención en todo el territorio colombiano.</p></div></div>
+        <div class="benefit-row"><i class="fas fa-laptop mt-0.5"></i><div><h4 class="font-semibold text-gray-800 text-sm">Atención virtual</h4><p class="text-xs text-gray-500">100% en línea, incluso para colombianos en el exterior.</p></div></div>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <p class="footer-note">© <span id="year"></span> Lizeth Lozano · Contadora Pública</p>
-  </section>
+<!-- ===================== MODAL: GALERÍA ===================== -->
+<div id="gallery-modal" class="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="modal-header-title">Galería</h2>
+      <button class="modal-close-btn">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="gallery-grid" id="galleryGrid">
+        <img src="assets/img/promos/promo-rut.jpg" alt="Actualización de RUT" data-index="0">
+        <img src="assets/img/promos/promo-planeacion-tributaria.jpg" alt="Planeación tributaria" data-index="1">
+        <img src="assets/img/promos/promo-declaracion-renta.jpg" alt="Declaración de renta" data-index="2">
+        <img src="assets/img/promos/promo-atencion-virtual.jpg" alt="Atención virtual en toda Colombia" data-index="3">
+        <img src="assets/img/promos/promo-certificado-ingresos.jpg" alt="Certificado de ingresos" data-index="4">
+        <img src="assets/img/promos/promo-declara-renta-preguntas.jpg" alt="¿Debes declarar renta?" data-index="5">
+      </div>
+    </div>
+  </div>
+</div>
 
-</main>
+<!-- ===================== MODAL: TESTIMONIOS ===================== -->
+<div id="testimonials-modal" class="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="modal-header-title">Testimonios</h2>
+      <button class="modal-close-btn">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="space-y-3">
+        <div class="testimonial-card">
+          <p class="text-sm text-gray-700 italic">"Lizeth me ayudó a organizar mi declaración de renta sin estrés. Muy clara y puntual en cada paso."</p>
+          <p class="text-xs font-semibold mt-2" style="color:var(--navy);">María C. — Bogotá</p>
+        </div>
+        <div class="testimonial-card">
+          <p class="text-sm text-gray-700 italic">"Vivo en el exterior y me hizo todo el proceso virtual, rápido y con total confianza. Recomendada."</p>
+          <p class="text-xs font-semibold mt-2" style="color:var(--navy);">Jorge R. — Colombiano en España</p>
+        </div>
+        <div class="testimonial-card">
+          <p class="text-sm text-gray-700 italic">"Su asesoría tributaria me ahorró tiempo y dinero. Profesional, cercana y muy responsable."</p>
+          <p class="text-xs font-semibold mt-2" style="color:var(--navy);">Andrés P. — Medellín</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<!-- ===================== BOTONES FLOTANTES ===================== -->
-<nav class="floating-actions" aria-label="Acciones rápidas">
-  <button class="fab" id="fabWhatsapp" aria-label="WhatsApp">
-    <img src="assets/icons/whatsapp.svg" class="icon icon-white" alt="">
-  </button>
-  <button class="fab" id="fabCall" aria-label="Llamar">
-    <img src="assets/icons/phone.svg" class="icon icon-white" alt="">
-  </button>
-  <button class="fab" id="fabShare" aria-label="Compartir">
-    <img src="assets/icons/share.svg" class="icon icon-white" alt="">
-  </button>
-  <button class="fab fab-gold" id="fabSave" aria-label="Guardar contacto">
-    <img src="assets/icons/save-contact.svg" class="icon icon-navy" alt="">
-  </button>
-</nav>
+<!-- ===================== MODAL: COBERTURA ===================== -->
+<div id="coverage-modal" class="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="modal-header-title">Cobertura</h2>
+      <button class="modal-close-btn">&times;</button>
+    </div>
+    <div class="modal-body text-center">
+      <i class="fas fa-map-marked-alt text-4xl mb-3" style="color:var(--gold);"></i>
+      <p class="text-sm text-gray-700">Atención virtual disponible en <strong>toda Colombia</strong> y para <strong>colombianos en el exterior</strong>.</p>
+      <p class="text-xs text-gray-500 mt-3">Todo el proceso se realiza en línea: solo necesitas conexión a internet.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODAL: INSTALAR ===================== -->
+<div id="install-modal" class="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="modal-header-title">Guarda esta tarjeta</h2>
+      <button class="modal-close-btn">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p class="text-center text-gray-600 mb-5 text-sm">Agrégala a tu pantalla de inicio para tenerla siempre a la mano.</p>
+      <div class="space-y-4">
+        <div class="p-3 bg-gray-50 rounded-lg border">
+          <h3 class="text-sm font-semibold mb-2 flex items-center gap-2" style="color:var(--navy);"><i class="fab fa-apple"></i> iPhone (Safari)</h3>
+          <ol class="list-decimal list-inside text-gray-600 space-y-1 text-xs">
+            <li>Toca el ícono de Compartir.</li>
+            <li>Elige "Agregar a la pantalla de inicio".</li>
+          </ol>
+        </div>
+        <div class="p-3 bg-gray-50 rounded-lg border">
+          <h3 class="text-sm font-semibold mb-2 flex items-center gap-2" style="color:var(--navy);"><i class="fab fa-android"></i> Android (Chrome)</h3>
+          <ol class="list-decimal list-inside text-gray-600 space-y-1 text-xs">
+            <li>Toca los tres puntos del menú.</li>
+            <li>Elige "Agregar a la pantalla principal".</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ===================== LIGHTBOX GALERÍA ===================== -->
 <div class="lightbox" id="lightbox">
-  <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar">
-    <img src="assets/icons/close.svg" class="icon icon-white" alt="">
-  </button>
-  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Anterior">
-    <img src="assets/icons/arrow-left.svg" class="icon icon-white" alt="">
-  </button>
-  <img src="" alt="" class="lightbox-img" id="lightboxImg">
-  <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Siguiente">
-    <img src="assets/icons/arrow-right.svg" class="icon icon-white" alt="">
-  </button>
+  <button class="lightbox-close" id="lightboxClose"><i class="fas fa-times"></i></button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev"><i class="fas fa-chevron-left"></i></button>
+  <img src="" alt="" id="lightboxImg">
+  <button class="lightbox-nav lightbox-next" id="lightboxNext"><i class="fas fa-chevron-right"></i></button>
 </div>
 
-<!-- ===================== TOAST ===================== -->
 <div class="toast" id="toast"></div>
 
-<script src="script.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  /* --------- CONFIGURACIÓN (no se muestra en pantalla) --------- */
+  const CONFIG = {
+    nombre: "Lizeth Lozano",
+    cargo: "Contadora Pública",
+    telefono: "573125580886",
+    mensajeWhatsapp: "Hola Lizeth, vi tu tarjeta digital y quiero información sobre tus servicios contables y tributarios.",
+    urlTarjeta: "https://konfiozinc.github.io/lizeth-lozano/"
+  };
+
+  /* --------- Toast --------- */
+  const toast = document.getElementById('toast');
+  let toastTimer = null;
+  function showToast(msg){
+    if(!toast) return;
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(()=> toast.classList.remove('show'), 2600);
+  }
+
+  /* --------- Helper genérico para modales simples --------- */
+  function wireModal(btnId, modalId){
+    const btn = document.getElementById(btnId);
+    const modal = document.getElementById(modalId);
+    if(!btn || !modal) return;
+    const open = () => modal.classList.add('active');
+    const close = () => modal.classList.remove('active');
+    btn.addEventListener('click', open);
+    modal.querySelector('.modal-close-btn')?.addEventListener('click', close);
+    modal.addEventListener('click', (e) => { if(e.target === modal) close(); });
+  }
+
+  wireModal('services-btn', 'services-modal');
+  wireModal('benefits-btn', 'benefits-modal');
+  wireModal('gallery-btn', 'gallery-modal');
+  wireModal('testimonials-btn', 'testimonials-modal');
+  wireModal('coverage-btn', 'coverage-modal');
+  wireModal('install-btn', 'install-modal');
+
+  /* --------- WhatsApp --------- */
+  function abrirWhatsapp(){
+    const texto = encodeURIComponent(CONFIG.mensajeWhatsapp);
+    window.open(`https://wa.me/${CONFIG.telefono}?text=${texto}`, '_blank', 'noopener');
+  }
+  document.getElementById('whatsapp-btn')?.addEventListener('click', abrirWhatsapp);
+  document.getElementById('whatsapp-grid-btn')?.addEventListener('click', abrirWhatsapp);
+
+  /* --------- Llamar --------- */
+  document.getElementById('call-btn')?.addEventListener('click', () => {
+    window.location.href = `tel:+${CONFIG.telefono}`;
+  });
+
+  /* --------- Compartir --------- */
+  document.getElementById('share-btn')?.addEventListener('click', async () => {
+    const shareData = {
+      title: `${CONFIG.nombre} | ${CONFIG.cargo}`,
+      text: 'Tu tranquilidad, mi compromiso. Conoce mis servicios contables y tributarios.',
+      url: CONFIG.urlTarjeta
+    };
+    try{
+      if(navigator.share){ await navigator.share(shareData); }
+      else{ await navigator.clipboard.writeText(CONFIG.urlTarjeta); showToast('Enlace copiado'); }
+    }catch(e){ /* cancelado por el usuario */ }
+  });
+
+  /* --------- Guardar contacto (vCard) --------- */
+  function generarVCard(){
+    const vcard = [
+      "BEGIN:VCARD",
+      "VERSION:3.0",
+      `N:Lozano;Lizeth;;;`,
+      `FN:${CONFIG.nombre}`,
+      `TITLE:${CONFIG.cargo}`,
+      `TEL;TYPE=CELL:+${CONFIG.telefono}`,
+      `ADR:;;Colombia;;;;Colombia`,
+      `URL:${CONFIG.urlTarjeta}`,
+      `NOTE:Declaración de renta, planeación tributaria, RUT, certificados de ingresos, asesoría contable y tributaria.`,
+      "END:VCARD"
+    ].join("\n");
+    const blob = new Blob([vcard], {type:"text/vcard;charset=utf-8"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = "Lizeth_Lozano.vcf";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('Contacto guardado');
+  }
+  document.getElementById('save-contact-btn')?.addEventListener('click', generarVCard);
+
+  /* --------- Galería + Lightbox --------- */
+  const galleryImgs = Array.from(document.querySelectorAll('#galleryGrid img'));
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  let currentIndex = 0;
+
+  function openLightbox(i){
+    currentIndex = i;
+    updateLightbox();
+    lightbox.classList.add('open');
+  }
+  function closeLightbox(){ lightbox.classList.remove('open'); }
+  function updateLightbox(){
+    const item = galleryImgs[currentIndex];
+    lightboxImg.src = item.getAttribute('src');
+    lightboxImg.alt = item.getAttribute('alt');
+  }
+  function nextImg(){ currentIndex = (currentIndex+1) % galleryImgs.length; updateLightbox(); }
+  function prevImg(){ currentIndex = (currentIndex-1+galleryImgs.length) % galleryImgs.length; updateLightbox(); }
+
+  galleryImgs.forEach((img, i) => img.addEventListener('click', () => openLightbox(i)));
+  document.getElementById('lightboxClose')?.addEventListener('click', closeLightbox);
+  document.getElementById('lightboxNext')?.addEventListener('click', nextImg);
+  document.getElementById('lightboxPrev')?.addEventListener('click', prevImg);
+  lightbox?.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', (e) => {
+    if(!lightbox.classList.contains('open')) return;
+    if(e.key === 'Escape') closeLightbox();
+    if(e.key === 'ArrowRight') nextImg();
+    if(e.key === 'ArrowLeft') prevImg();
+  });
+
+})();
+</script>
 </body>
 </html>
