@@ -485,7 +485,7 @@
 </head>
 <body class="bg-gray-200">
 
-<div class="card-container">
+<div class="card-container text-slate-800">
 
   <!-- ================= TOP HEADER ================= -->
   <div class="top-header">
@@ -539,7 +539,6 @@
 
       <!-- ================= NUEVA SECCIÓN: REDES SOCIALES ================= -->
       <div class="social-icons-row reveal d5">
-        <!-- Cambia los href por los enlaces reales de la clienta -->
         <a href="https://www.facebook.com/tu_pagina" target="_blank" rel="noopener" aria-label="Facebook">
           <i class="fab fa-facebook-f"></i>
         </a>
@@ -555,10 +554,9 @@
         <a href="https://www.tiktok.com/@tu_usuario" target="_blank" rel="noopener" aria-label="TikTok">
           <i class="fab fa-tiktok"></i>
         </a>
-        <!-- Puedes agregar o quitar redes según necesites -->
       </div>
 
-      <!-- Grid de accesos (ahora sin el botón "Redes sociales" porque ya están arriba) -->
+      <!-- Grid de accesos -->
       <div class="grid grid-cols-4 gap-2.5 w-full max-w-sm mx-auto mt-4 reveal d6">
         <div id="services-btn" class="social-btn flex flex-col justify-center items-center py-2.5 w-full h-[72px] rounded-2xl">
           <i class="fas fa-briefcase text-xl"></i>
@@ -600,18 +598,17 @@
     </div>
   </div>
 
-  <!-- ================= BANNER INFERIOR ================= -->
-  <div class="footer-banner text-center py-3 px-4 font-semibold text-sm">
-    <p>Estoy para ayudarte <i class="fas fa-heart" style="color:var(--navy);"></i></p>
+  <!-- ================= BANNER INFERIOR CON TU MARCA UNIFICADA ================= -->
+  <div class="footer-banner text-center py-2 px-4 font-bold flex flex-col gap-0.5 justify-center items-center border-t border-amber-300">
+    <p class="text-xs uppercase tracking-tight">Estoy para ayudarte <i class="fas fa-heart text-red-700"></i></p>
+    <div class="text-[7.5px] tracking-widest opacity-80 uppercase font-medium mt-0.5">
+        Creado por KONFÍO ZINC — Todos los derechos reservados
+    </div>
   </div>
 </div>
 
-<!-- ===================== MODALES (sin cambios, solo se muestran los que ya tenías) ===================== -->
-<!-- (Los modales de servicios, beneficios, galería, testimonios, cobertura e instalación son los mismos que antes) -->
-<!-- No los repito aquí por brevedad, pero deben estar presentes en tu archivo final. -->
-
 <!-- ===================== LIGHTBOX Y TOAST ===================== -->
-<!-- (Igual que antes) -->
+<div class="toast" id="toast"></div>
 
 <script>
 (function(){
